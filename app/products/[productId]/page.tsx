@@ -1,6 +1,5 @@
 import { products } from '@/app/data/products';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useMemo } from 'react';
 import ProductNotFound from './not-found';
 
