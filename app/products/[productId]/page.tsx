@@ -1,17 +1,14 @@
-import { products } from '@/app/data/products';
 import Image from 'next/image';
-import { useMemo } from 'react';
 import ProductNotFound from './not-found';
+import { APP_BASE_URL } from '@/app/constants';
 
 type Props = {
   params: { productId: string };
 };
 
-const ProductDetails: React.FC<Props> = ({ params }) => {
-  const product = useMemo(() => {
-    const foundProduct = products.find(p => p.id === params.productId);
-    return foundProduct;
-  }, [params.productId]);
+const ProductDetails: React.FC<Props> = async ({ params }) => {
+  const response = await fetch(`${APP_BASE_URL}/api/products/${params.productId}`);
+  const product = await response.json();
 
   if (!product) {
     return <ProductNotFound />;
